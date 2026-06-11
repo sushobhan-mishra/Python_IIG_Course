@@ -1,0 +1,15 @@
+Electron density (LPW)
+E temp
+
+solar wind e density
+solar wind e temp (SWEA)
+
+T ion density(SWIA)
+Bulk ion flow velocity
+Scalar ion flow velocity
+
+mag_field vectoe in MSO coordinates (MAG)
+XYZ component of spacecraft posn
+
+Spacecraft local time(SPICE)
+spacecraft alt w.r.t aeroid

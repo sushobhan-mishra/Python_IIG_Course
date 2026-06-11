@@ -1,0 +1,10 @@
+X = 5
+Y = 5
+print(X == Y)
+X = 10
+Y = 7
+print(X != Y)
+print(X < Y)
+print(X > Y)
+print(X <= Y)
+print(X >= Y)
