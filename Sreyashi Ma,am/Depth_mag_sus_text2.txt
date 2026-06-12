@@ -1,0 +1,98 @@
+"""
+====================================================================
+DEPTH vs MAGNETIC SUSCEPTIBILITY PLOT
+====================================================================
+
+Input file:
+Depth_mag_sus.xlsx
+
+Columns:
+Km(x10^-6)
+Top depth[m CSF-A]
+
+Output:
+Depth_vs_Magnetic_Susceptibility.png
+====================================================================
+"""
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# --------------------------------------------------
+# Read Excel file
+# --------------------------------------------------
+file_path = "Depth_mag_sus.xlsx"
+
+df = pd.read_excel(file_path)
+
+# --------------------------------------------------
+# Extract columns
+# --------------------------------------------------
+mag_sus = df["Km(x10^-6)"]
+depth = df["Top depth[m CSF-A]"]
+
+# --------------------------------------------------
+# Create figure
+# --------------------------------------------------
+fig, ax = plt.subplots(figsize=(5, 8))
+
+# Plot line
+ax.plot(
+    mag_sus,
+    depth,
+    color='black',
+    linewidth=1.5
+)
+
+# Plot data points
+# ax.scatter
+
+# --------------------------------------------------
+# Geological convention:
+# Depth increases downward
+# --------------------------------------------------
+ax.invert_yaxis()
+
+# --------------------------------------------------
+# Labels
+# --------------------------------------------------
+ax.set_xlabel(
+    r'Magnetic Susceptibility ($\times10^{-6}$ SI)',
+    fontsize=12
+)
+
+ax.set_ylabel(
+    'Depth (m CSF-A)',
+    fontsize=12
+)
+
+# --------------------------------------------------
+# Tick formatting
+# --------------------------------------------------
+ax.tick_params(
+    axis='both',
+    direction='in',
+    length=6,
+    width=1
+)
+
+# Remove gridlines
+ax.grid(False)
+
+# Thicken plot border
+for spine in ax.spines.values():
+    spine.set_linewidth(1.2)
+
+# --------------------------------------------------
+# Layout
+# --------------------------------------------------
+plt.tight_layout()
+
+# Save figure
+plt.savefig(
+    "Depth_vs_Magnetic_Susceptibility.png",
+    dpi=600,
+    bbox_inches="tight"
+)
+
+plt.show()

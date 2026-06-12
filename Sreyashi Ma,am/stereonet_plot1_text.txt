@@ -1,0 +1,71 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import mplstereonet
+
+# ============================================================
+# Read strike-dip data
+# ============================================================
+csv_file = "Strike_dip_data.csv"
+
+df = pd.read_csv(csv_file)
+
+# Ensure writable float arrays
+strike = df["Strike"].to_numpy(dtype=float, copy=True)
+dip = df["Dip"].to_numpy(dtype=float, copy=True)
+
+# ============================================================
+# Create stereonet
+# ============================================================
+fig = plt.figure(figsize=(8, 8))
+ax = fig.add_subplot(111, projection="stereonet")
+
+# Plot great circles (planes)
+ax.plane(
+    strike,
+    dip,
+    color="blue",
+    linewidth=0.8,
+    alpha=0.6
+)
+
+# Plot poles
+ax.pole(
+    strike,
+    dip,
+    marker="o",
+    color="red",
+    markersize=5,
+    label=f"Poles (n={len(strike)})"
+)
+
+# Grid
+ax.grid(True)
+
+# Title
+ax.set_title(
+    "Stereonet Plot",
+    fontsize=14,
+    pad=20
+)
+
+# Legend
+ax.legend(loc="upper right")
+
+# ============================================================
+# Save 400 DPI JPEG
+# ============================================================
+output_file = "Stereonet_Plot_400dpi.jpg"
+
+plt.savefig(
+    output_file,
+    dpi=400,
+    format="jpeg",
+    bbox_inches="tight",
+    facecolor="white"
+)
+
+print(f"Figure saved as: {output_file}")
+
+# Display figure
+plt.show()
